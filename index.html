@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vite App</title>
+  </head>
+
+  <body>
+    <div id="app" class="min-h-screen flex flex-col mx-auto bg-zinc-50">
+      <header class="box bg-red-700 shadow-md">
+        <div
+          class="
+            flex
+            items-center
+            justify-between
+            text-gray-100
+            max-w-5xl
+            mx-auto
+          "
+        >
+          <span class="text-3xl font-bold select-none cursor-default"
+            >Proj.</span
+          >
+          <div class="">
+            <a href="https://github.com/George-Miao/proj">
+              <span
+                class="iconify cursor-pointer"
+                data-width="24"
+                data-height="24"
+                data-icon="akar-icons:github-fill"
+              ></span>
+            </a>
+          </div>
+        </div>
+      </header>
+      <main
+        class="
+          flex-grow
+          box
+          grid
+          auto-rows-min
+          lg:grid-cols-3 lg:gap-6
+          md:grid-cols-2 md:gap-5
+          sm:grid-cols-2 sm:gap-4
+          overflow-hidden
+          mx-auto
+        "
+        style="width: min(100vw, 70rem)"
+        x-data="{
+          projects,
+        }"
+      >
+        <template x-for="category in projects">
+          <!-- Category -->
+          <div class="text-left mb-8 overflow-hidden">
+            <!-- Category meta -->
+            <div class="flex items-baseline pb-4">
+              <!-- Category icon -->
+              <template x-if="category.icon">
+                <div class="my-auto text-gray-500">
+                  <span
+                    class="iconify mr-2"
+                    data-width="24"
+                    data-height="24"
+                    :data-icon="category.icon"
+                  ></span>
+                </div>
+              </template>
+              <!-- Category name -->
+              <h1 class="text-2xl" x-text="category.name"></h1>
+              <!-- Category description -->
+              <span
+                x-text="category.description"
+                class="
+                  ml-3
+                  text-gray-600 text-sm
+                  whitespace-nowrap
+                  overflow-hidden
+                  text-ellipsis
+                "
+              ></span>
+            </div>
+            <template x-for="item in category.items">
+              <!-- Item -->
+              <a
+                class="
+                  flex
+                  items-center
+                  px-5
+                  py-3
+                  md:mb-4
+                  sm:mb-3
+                  mb-3
+                  rounded
+                  bg-white
+                  shadow
+                "
+                x-data="
+                // Not tested, no result
+                {
+                  up: 0
+                }"
+                x-init="item.link && fetch(item.link).then(res => {
+                  if (res.ok) {
+                    // Tested, succeeded
+                    up = 1
+                  } else {
+                    // Tested, failed
+                    up = 2
+                  }
+                }).catch(() => up = 2).finally(() => console.log(`Status of ${item.link}: ${up}`))"
+                :label="item.link ?? null"
+              >
+                <!-- Item content -->
+                <div class="flex-grow overflow-hidden overflow-ellipsis">
+                  <!-- Item name  -->
+                  <!-- Item name -->
+                  <h3 x-text="item.name" class="mb-1.5 text-lg"></h3>
+                  <!-- Item description -->
+                  <p
+                    class="text-gray-500 text-sm w-full mb-3"
+                    x-text="item.description"
+                  />
+                  <!-- Item indicator -->
+                  <div class="flex item-indicators" x-data="{ size: 18 }">
+                    <template x-if="up === 1">
+                      <div>
+                        <span
+                          class="iconify text-green-600"
+                          :data-width="size"
+                          :data-height="size"
+                          data-icon="akar-icons:circle-check"
+                        ></span>
+                      </div>
+                    </template>
+                    <!-- Warn -->
+                    <template x-if="up === 2">
+                      <div>
+                        <span
+                          class="iconify text-yellow-600"
+                          :data-width="size"
+                          :data-height="size"
+                          data-icon="ant-design:warning"
+                        ></span>
+                      </div>
+                    </template>
+                    <!-- isPrivate -->
+                    <template x-if="item.isPrivate">
+                      <div>
+                        <span
+                          class="iconify text-gray-600"
+                          data-icon="bx:bx-lock-alt"
+                          :data-width="size"
+                          :data-height="size"
+                        ></span>
+                      </div>
+                    </template>
+                    <!-- Has link -->
+                    <template x-if="item.link">
+                      <a :href="item.link">
+                        <span
+                          class="
+                            iconify
+                            text-gray-500
+                            hover:text-black
+                            transition-none
+                            cursor-pointer
+                          "
+                          :data-width="size"
+                          :data-height="size"
+                          data-icon="akar-icons:link-chain"
+                        ></span>
+                      </a>
+                    </template>
+                    <!-- Has github -->
+                    <template x-if="item.github">
+                      <a :href="item.github">
+                        <span
+                          class="
+                            iconify
+                            text-gray-500
+                            hover:text-black
+                            transition-none
+                            cursor-pointer
+                          "
+                          :data-width="size"
+                          :data-height="size"
+                          data-icon="akar-icons:github-fill"
+                        ></span>
+                      </a>
+                    </template>
+                  </div>
+                </div>
+                <!-- Item icon -->
+                <template x-if="item.icon"
+                  ><div class="m-2 overflow-visible text-gray-500">
+                    <span
+                      class="iconify"
+                      data-width="28"
+                      data-height="28"
+                      :data-icon="item.icon"
+                    ></span></div
+                ></template>
+              </a>
+            </template>
+          </div>
+        </template>
+      </main>
+      <footer class="box pb-4 bg-zinc-100 text-zinc-600 text-sm leading-7">
+        <p><b>Proj.</b> by George Miao &COPY; 2021</p>
+        <p>
+          Built with
+          <a href="https://tailwindcss.com">TailwindCSS</a>
+          &
+          <a href="https://alpinejs.dev/directives/bind">AlpineJS</a>
+        </p>
+        <p>The source code is in MIT license</p>
+      </footer>
+    </div>
+    <script type="module" src="/src/main.ts"></script>
+    <script
+      src="https://unpkg.com/alpinejs@3.7.1/dist/cdn.min.js"
+      defer
+    ></script>
+    <script
+      src="https://code.iconify.design/2/2.1.0/iconify.min.js"
+      defer
+    ></script>
+  </body>
+</html>

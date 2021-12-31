@@ -1,0 +1,9 @@
+{
+  "map": false,
+  "plugins": {
+    "tailwindcss/nesting": {},
+    "tailwindcss": {},
+    "lost": {},
+    "autoprefixer": {}
+  }
+}
