@@ -1,8 +1,9 @@
 // TODO: impl indicator
 export interface Indicator {
   icon: string;
-  color?: string;
+  class?: string;
   label?: string;
+  link?: string;
 }
 
 export interface Item {
@@ -34,38 +35,39 @@ const projects = defineProjects([
       {
         name: "Proxmox",
         isPrivate: true,
-        description: "description", //TODO
+        description:
+          "VM environment, hosts most of my services in Tharsis. Installed on R720",
         icon: "cib:proxmox",
       },
       {
         name: "OPNsense",
         isPrivate: true,
-        description: "description", //TODO
+        description: "Router, installed on a separated R420",
         icon: "simple-icons:opnsense",
       },
       {
         name: "Prometheus",
         isPrivate: true,
-        description: "description", //TODO
+        description: "Matrix collector",
         icon: "simple-icons:prometheus",
       },
       {
         name: "Grafana",
         isPrivate: true,
-        description: "description", //TODO
+        description: "Matrix visualization. Consume data from Prometheus.",
         icon: "simple-icons:grafana",
       },
 
       {
         name: "Teamcity",
         isPrivate: true,
-        description: "description", //TODO
+        description: "CI/CD system by Jetbrains",
         icon: "simple-icons:teamcity",
       },
       {
         name: "SSH",
         isPrivate: true,
-        description: "description", //TODO
+        description: "SSH bastion, with security provided by Cloudflare Access",
         icon: "mdi:ssh",
       },
     ],
@@ -94,7 +96,8 @@ const projects = defineProjects([
         name: "Typings.dev",
         link: "https://typings.dev",
         github: "https://github.com/George-Miao/typings.dev",
-        description: "description", //TODO
+        description:
+          "Typing practice site for Pinyin and Shuang users inspired by Typing-cn",
         icon: "ion:logo-vue",
       },
       {
@@ -125,37 +128,56 @@ const projects = defineProjects([
         icon: "cib:rust",
         github: "https://github.com/George-Miao/mail-list-rss",
         healthCheck: "https://rss.miao.do/health",
-        description: "description", //TODO
+        description:
+          "Translate mail subscription to a RSS feed, written in Rust",
       },
       {
         name: "Shot",
         icon: "cib:rust",
         github: "https://github.com/George-Miao/shot",
-        description: "description", //TODO
+        description:
+          "Simple CLI that encode and upload images to Cloudflare Image, either from clipboard, or local file",
       },
       {
         name: "Clashctl",
         icon: "cib:rust",
         github: "https://github.com/George-Miao/clashctl",
-        description: "description", //TODO
+        description: "Easy-to-use TUI & CLI to interact with Clash RESTful API",
       },
       {
         name: "Knotify telegram",
         icon: "akar-icons:telegram-fill",
         github: "https://github.com/George-Miao/knotify-telegram",
-        description: "description", //TODO
+        description:
+          "Bot as a bridge, forward HTTP request and PM to my telegram",
+        indicators: [
+          {
+            icon: "cib:typescript",
+          },
+        ],
       },
       {
         name: "Golden Axe",
         icon: "akar-icons:telegram-fill",
         github: "https://github.com/suisei-cn/golden-axe-rs",
-        description: "description", //TODO
+        description: "Anti-vandalism bot for Telegram",
+        indicators: [
+          {
+            icon: "cib:rust",
+          },
+        ],
       },
       {
         name: "RSS worker",
         icon: "cib:cloudflare",
         github: "https://github.com/George-Miao/rss-worker",
-        description: "description", //TODO
+        description:
+          "Cloudflare worker that generates RSS feed from various source",
+        indicators: [
+          {
+            icon: "cib:typescript",
+          },
+        ],
       },
     ],
   },
@@ -174,7 +196,8 @@ const projects = defineProjects([
         name: "Upptime status",
         icon: "ic:outline-monitor-heart",
         link: "https://status.miao.dev",
-        description: "description", //TODO
+        github: "https://github.com/George-Miao/upptime",
+        description: "Status page of my services", //TODO
       },
     ],
   },

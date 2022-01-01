@@ -23,7 +23,7 @@
   }
 
   .item-indicators .iconify {
-    @apply mr-2;
+    @apply mr-2 select-none;
   }
 
   .ok::after {

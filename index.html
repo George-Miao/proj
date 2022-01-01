@@ -4,11 +4,11 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite App</title>
+    <title>Proj.</title>
   </head>
 
   <body>
-    <div id="app" class="min-h-screen flex flex-col mx-auto bg-zinc-50">
+    <div id="app" class="min-h-screen flex flex-col mx-auto bg-zinc-100">
       <header class="box bg-red-700 shadow-md">
         <div
           class="
@@ -59,7 +59,7 @@
             <div class="flex items-baseline pb-4">
               <!-- Category icon -->
               <template x-if="category.icon">
-                <div class="my-auto text-gray-500">
+                <div class="my-auto text-gray-500 select-none">
                   <span
                     class="iconify mr-2"
                     data-width="24"
@@ -191,11 +191,23 @@
                         ></span>
                       </a>
                     </template>
+                    <!-- Other indicators -->
+                    <template x-for="indicator in item.indicators">
+                      <a :href="indicator.link ?? null">
+                        <span
+                          class="iconify text-gray-500 transition-none"
+                          :class="indicator.link && 'hover:text-black cursor-pointer' + indicator.class"
+                          :data-width="size"
+                          :data-height="size"
+                          :data-icon="indicator.icon"
+                        ></span>
+                      </a>
+                    </template>
                   </div>
                 </div>
                 <!-- Item icon -->
                 <template x-if="item.icon"
-                  ><div class="m-2 overflow-visible text-gray-500">
+                  ><div class="m-2 overflow-visible text-gray-500 select-none">
                     <span
                       class="iconify"
                       data-width="28"
@@ -208,7 +220,18 @@
           </div>
         </template>
       </main>
-      <footer class="box pb-4 bg-zinc-100 text-zinc-600 text-sm leading-7">
+      <footer
+        class="
+          box
+          md:py-8 md:leading-7 md:text-s
+          sm:py-6
+          text-xs
+          py-4
+          bg-zinc-200
+          text-zinc-600
+          leading-6
+        "
+      >
         <p><b>Proj.</b> by George Miao &COPY; 2021</p>
         <p>
           Built with
