@@ -2,6 +2,39 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
+@font-face {
+  font-family: "Josefin-sans";
+  font-style: normal;
+  font-display: swap;
+  font-weight: 300;
+  src: url("https://cdn.jsdelivr.net/npm/@openfonts/josefin-sans_latin@1.0.1/files/josefin-sans-latin-300.woff2")
+      format("woff2"),
+    url("https://cdn.jsdelivr.net/npm/@openfonts/josefin-sans_latin@1.0.1/files/josefin-sans-latin-300.woff")
+      format("woff");
+}
+
+@font-face {
+  font-family: "Josefin-sans";
+  font-style: normal;
+  font-display: swap;
+  font-weight: normal;
+  src: url("https://cdn.jsdelivr.net/npm/@openfonts/josefin-sans_latin@1.0.1/files/josefin-sans-latin-400.woff2")
+      format("woff2"),
+    url("https://cdn.jsdelivr.net/npm/@openfonts/josefin-sans_latin@1.0.1/files/josefin-sans-latin-400.woff")
+      format("woff");
+}
+
+@font-face {
+  font-family: "Josefin-sans";
+  font-style: normal;
+  font-display: swap;
+  font-weight: 700;
+  src: url("https://cdn.jsdelivr.net/npm/@openfonts/josefin-sans_latin@1.0.1/files/josefin-sans-latin-700.woff2")
+      format("woff2"),
+    url("https://cdn.jsdelivr.net/npm/@openfonts/josefin-sans_latin@1.0.1/files/josefin-sans-latin-700.woff")
+      format("woff");
+}
+
 :root {
   --black: #171717;
   --gray: #444444;
@@ -16,6 +49,10 @@
 
   footer a {
     @apply text-red-700;
+  }
+
+  .header-link {
+    @apply p-3 m-1 leading-tight uppercase text-sm  font-sans font-bold cursor-pointer hover:shadow-[0_10px_15px_0_rgba(0,0,0,.15)] hover:bg-[rgba(255,255,255,.1)] transition-all;
   }
 
   .box {

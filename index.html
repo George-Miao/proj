@@ -43,8 +43,8 @@
             mx-auto
           "
         >
-          <span class="text-3xl font-bold select-none cursor-default"
-            >Proj.</span
+          <span
+            class="text-3xl font-bold font-sans select-none cursor-default flex items-baseline"
           >
           <div class="">
             <a href="https://github.com/George-Miao/proj">
@@ -92,7 +92,7 @@
                 </div>
               </template>
               <!-- Category name -->
-              <h1 class="text-2xl" x-text="category.name"></h1>
+              <h1 class="text-2xl font-sans" x-text="category.name"></h1>
               <!-- Category description -->
               <span
                 x-text="category.description"
@@ -140,7 +140,10 @@
                 <div class="flex-grow overflow-hidden overflow-ellipsis">
                   <!-- Item name  -->
                   <!-- Item name -->
-                  <h3 x-text="item.name" class="mb-1.5 text-lg"></h3>
+                  <h3
+                    x-text="item.name"
+                    class="mt-1.5 mb-2 text-lg font-sans"
+                  ></h3>
                   <!-- Item description -->
                   <p
                     class="text-gray-500 text-sm w-full mb-3"
@@ -244,16 +247,7 @@
         </template>
       </main>
       <footer
-        class="
-          box
-          md:py-8 md:leading-7 md:text-s
-          sm:py-6
-          text-xs
-          py-4
-          bg-zinc-200
-          text-zinc-600
-          leading-6
-        "
+        class="box md:py-8 md:leading-7 md:text-s sm:py-6 text-xs py-4 bg-zinc-200 text-zinc-600 leading-6 font-sans"
       >
         <p><b>Proj.</b> by George Miao &COPY; 2021</p>
         <p>
