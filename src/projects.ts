@@ -1,32 +1,6 @@
-// TODO: impl indicator
-export interface Indicator {
-  icon: string;
-  class?: string;
-  label?: string;
-  link?: string;
-}
+import { defineCategories } from "./types";
 
-export interface Item {
-  name: string;
-  icon?: string;
-  description: string;
-  isPrivate?: boolean;
-  link?: string;
-  github?: string;
-  healthCheck?: string;
-  indicators?: Indicator[];
-}
-
-export interface Category {
-  name: string;
-  description?: string;
-  items: Item[];
-  icon?: string;
-}
-
-export const defineProjects = (val: Category[]) => val;
-
-const projects = defineProjects([
+const categories = defineCategories([
   {
     name: "Tharsis",
     description: "My home server rack",
@@ -203,4 +177,4 @@ const projects = defineProjects([
   },
 ]);
 
-export { projects };
+export { categories };

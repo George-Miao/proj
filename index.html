@@ -32,53 +32,66 @@
   </head>
 
   <body>
-    <div id="app" class="min-h-screen flex flex-col mx-auto bg-zinc-100">
+    <div
+      id="app"
+      class="min-h-screen flex flex-col mx-auto bg-zinc-100"
+      x-data="{ proj }"
+    >
       <header class="box bg-red-700 shadow-md">
+        <!-- Header logo & title -->
         <div
-          class="
-            flex
-            items-center
-            justify-between
-            text-gray-100
-            max-w-5xl
-            mx-auto
-          "
+          class="flex items-center justify-between text-gray-100 fill-gray-100 max-w-5xl mx-auto"
         >
           <span
             class="text-3xl font-bold font-sans select-none cursor-default flex items-baseline"
           >
-          <div class="">
-            <a href="https://github.com/George-Miao/proj">
-              <span
-                class="iconify cursor-pointer"
-                data-width="24"
-                data-height="24"
-                data-icon="akar-icons:github-fill"
-              ></span>
-            </a>
+            <!-- Logo -->
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="w-6 h-6 mr-4 text-lg"
+              viewBox="0 0 3055.29 2653.48"
+            >
+              <polygon
+                class="cls-1"
+                points="652.85 2272.28 1525.78 2267.96 1309.43 2647.01 0 2653.48 1514.56 0 1734.68 376.91 652.85 2272.28"
+              />
+              <polygon
+                class="cls-1"
+                points="2174.89 1130.72 1742.16 1888.87 1304.44 1893.19 1954.77 753.82 2174.89 1130.72"
+              />
+              <polygon
+                class="cls-1"
+                points="3055.29 2638.4 1745.9 2644.87 1962.45 2265.77 2398.79 2263.63 2178.62 1886.72 2395.01 1507.63 3055.29 2638.4"
+              /></svg
+            >Proj.
+          </span>
+          <div class="flex">
+            <template x-for="link in proj.links">
+              <div class="header-link">
+                <template x-if="link.icon">
+                  <a :href="link.href">
+                    <span
+                      class="iconify"
+                      data-height="16"
+                      :data-icon="link.icon"
+                    />
+                  </a>
+                </template>
+                <template x-if="link.text">
+                  <a :href="link.href" x-text="link.text" />
+                </template>
+              </div>
+            </template>
           </div>
         </div>
       </header>
       <main
-        class="
-          flex-grow
-          box
-          grid
-          auto-rows-min
-          lg:grid-cols-3 lg:gap-6
-          md:grid-cols-2 md:gap-5
-          sm:grid-cols-2 sm:gap-4
-          overflow-hidden
-          mx-auto
-        "
+        class="flex-grow box grid auto-rows-min lg:grid-cols-3 lg:gap-6 md:grid-cols-2 md:gap-5 sm:grid-cols-2 sm:gap-4 overflow-hidden mx-auto"
         style="width: min(100vw, 70rem)"
-        x-data="{
-          projects,
-        }"
       >
-        <template x-for="category in projects">
-          <!-- Category -->
-          <div class="text-left mb-8 overflow-hidden">
+        <!-- Categories -->
+        <template x-for="category in proj.categories">
+          <div class="text-left mb-8">
             <!-- Category meta -->
             <div class="flex items-baseline pb-4">
               <!-- Category icon -->
@@ -89,7 +102,7 @@
                     data-width="24"
                     data-height="24"
                     :data-icon="category.icon"
-                  ></span>
+                  />
                 </div>
               </template>
               <!-- Category name -->
@@ -97,44 +110,22 @@
               <!-- Category description -->
               <span
                 x-text="category.description"
-                class="
-                  ml-3
-                  text-gray-600 text-sm
-                  whitespace-nowrap
-                  overflow-hidden
-                  text-ellipsis
-                "
+                class="ml-3 text-gray-600 text-sm whitespace-nowrap overflow-hidden text-ellipsis"
               ></span>
             </div>
+
+            <!-- Items -->
             <template x-for="item in category.items">
-              <!-- Item -->
+              <!-- up = 0: Not tested, no result  -->
+              <!-- up = 1: Tested, connected  -->
+              <!-- up = 2: Tested, failed to connect  -->
               <a
-                class="
-                  flex
-                  items-center
-                  px-5
-                  py-3
-                  md:mb-4
-                  sm:mb-3
-                  mb-3
-                  rounded
-                  bg-white
-                  shadow
-                "
-                x-data="
-                // Not tested, no result
-                {
-                  up: 0
-                }"
-                x-init="item.link && fetch(item.link).then(res => {
-                  if (res.ok) {
-                    // Tested, succeeded
-                    up = 1
-                  } else {
-                    // Tested, failed
-                    up = 2
-                  }
-                }).catch(() => up = 2).finally(() => console.log(`Status of ${item.link}: ${up}`))"
+                class="flex items-center px-5 py-3 md:mb-4 sm:mb-3 mb-3 rounded bg-white shadow ring-1 ring-slate-900/5"
+                x-data="{ up: 0 }"
+                x-init="item.link && fetch(item.link)
+                  .then(res => (up = res.ok ? 1 : 2))
+                  .catch(() => up = 2)
+                  .finally(() => console.log(`Status of ${item.link} has changed to ${up}`))"
                 :label="item.link ?? null"
               >
                 <!-- Item content -->
@@ -147,7 +138,7 @@
                   ></h3>
                   <!-- Item description -->
                   <p
-                    class="text-gray-500 text-sm w-full mb-3"
+                    class="text-gray-600 text-sm w-full mb-3 font-thin"
                     x-text="item.description"
                   />
                   <!-- Item indicator -->
@@ -188,13 +179,7 @@
                     <template x-if="item.link">
                       <a :href="item.link">
                         <span
-                          class="
-                            iconify
-                            text-gray-500
-                            hover:text-black
-                            transition-none
-                            cursor-pointer
-                          "
+                          class="iconify text-gray-500 hover:text-black transition-none cursor-pointer"
                           :data-width="size"
                           :data-height="size"
                           data-icon="akar-icons:link-chain"
@@ -205,13 +190,7 @@
                     <template x-if="item.github">
                       <a :href="item.github">
                         <span
-                          class="
-                            iconify
-                            text-gray-500
-                            hover:text-black
-                            transition-none
-                            cursor-pointer
-                          "
+                          class="iconify text-gray-500 hover:text-black transition-none cursor-pointer"
                           :data-width="size"
                           :data-height="size"
                           data-icon="akar-icons:github-fill"
@@ -233,15 +212,16 @@
                   </div>
                 </div>
                 <!-- Item icon -->
-                <template x-if="item.icon"
-                  ><div class="m-2 overflow-visible text-gray-500 select-none">
+                <template x-if="item.icon">
+                  <div class="m-2 overflow-visible text-gray-500 select-none">
                     <span
                       class="iconify"
                       data-width="28"
                       data-height="28"
                       :data-icon="item.icon"
-                    ></span></div
-                ></template>
+                    ></span>
+                  </div>
+                </template>
               </a>
             </template>
           </div>

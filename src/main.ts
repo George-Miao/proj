@@ -1,12 +1,24 @@
-import { projects, Category } from "./projects";
-
 import "./main.css";
+
+import { categories } from "./projects";
+import { Proj } from "./types";
 
 declare global {
   interface Window {
-    projects: Category[];
+    proj: Proj;
   }
 }
 
-console.log(projects);
-window.projects = projects;
+window.proj = {
+  links: [
+    {
+      href: "https://github.com/George-Miao/proj",
+      icon: "akar-icons:github-fill",
+    },
+    {
+      href: "https://miao.dev",
+      text: "home",
+    },
+  ],
+  categories: categories,
+};
